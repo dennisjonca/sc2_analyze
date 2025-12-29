@@ -84,6 +84,51 @@ class TestAnalyzeBuildOrder(unittest.TestCase):
             self.assertIn("0:45", build_lines[0])
             self.assertIn("2:15", build_lines[1])
             self.assertIn("5:30", build_lines[2])
+    
+    def test_analyze_file_multiple_players(self):
+        """Test that output separates players correctly"""
+        # Create input file with two players
+        with open(self.input_file, 'w') as f:
+            f.write("At 0:12, Maru used BuildSupplyDepot\n")
+            f.write("At 0:18, Serral used BuildHatchery\n")
+            f.write("At 0:45, Maru used BuildBarracks\n")
+            f.write("At 1:00, Serral used BuildSpawningPool\n")
+        
+        # Analyze file
+        analyze_file(self.input_file, self.output_file)
+        
+        # Check output is separated by player
+        with open(self.output_file, 'r') as f:
+            content = f.read()
+            self.assertIn("Player: Maru", content)
+            self.assertIn("Player: Serral", content)
+            self.assertIn("Total players: 2", content)
+            self.assertIn("Total builds: 4", content)
+            
+            # Check each player has their builds
+            lines = content.split('\n')
+            
+            # Find Maru's section
+            maru_start = None
+            serral_start = None
+            for i, line in enumerate(lines):
+                if "Player: Maru" in line:
+                    maru_start = i
+                if "Player: Serral" in line:
+                    serral_start = i
+            
+            self.assertIsNotNone(maru_start)
+            self.assertIsNotNone(serral_start)
+            
+            # Check Maru's builds are in his section
+            maru_section = '\n'.join(lines[maru_start:serral_start])
+            self.assertIn("BuildSupplyDepot", maru_section)
+            self.assertIn("BuildBarracks", maru_section)
+            
+            # Check Serral's builds are in his section
+            serral_section = '\n'.join(lines[serral_start:])
+            self.assertIn("BuildHatchery", serral_section)
+            self.assertIn("BuildSpawningPool", serral_section)
 
 
 if __name__ == '__main__':

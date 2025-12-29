@@ -15,6 +15,7 @@ class TestSC2Extract(unittest.TestCase):
         
         self.assertIsNotNone(result)
         self.assertEqual(result['time'], '13:48')
+        self.assertEqual(result['player'], 'HeroMarine')
         self.assertEqual(result['build_command'], 'BuildFactoryTechLab')
     
     def test_extract_time_and_build_different_time(self):
@@ -24,6 +25,7 @@ class TestSC2Extract(unittest.TestCase):
         
         self.assertIsNotNone(result)
         self.assertEqual(result['time'], '5:30')
+        self.assertEqual(result['player'], 'Player1')
         self.assertEqual(result['build_command'], 'BuildBarracks')
     
     def test_extract_time_and_build_different_player(self):
@@ -33,6 +35,7 @@ class TestSC2Extract(unittest.TestCase):
         
         self.assertIsNotNone(result)
         self.assertEqual(result['time'], '22:15')
+        self.assertEqual(result['player'], 'Serral')
         self.assertEqual(result['build_command'], 'BuildHatchery')
     
     def test_extract_time_only(self):

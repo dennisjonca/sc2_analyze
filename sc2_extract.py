@@ -20,7 +20,7 @@ import re
 
 def extract_time_and_build(line):
     """
-    Extract time and build command from a game log line.
+    Extract time, player, and build command from a game log line.
     
     Parses lines in the format:
         "At HH:MM, [player] used [BuildCommand]"
@@ -29,27 +29,28 @@ def extract_time_and_build(line):
         line (str): A line from the game log
         
     Returns:
-        dict: A dictionary with 'time' and 'build_command' keys, or None if no match
+        dict: A dictionary with 'time', 'player', and 'build_command' keys, or None if no match
         
     Example:
         >>> extract_time_and_build("At 13:48, HeroMarine used BuildFactoryTechLab")
-        {'time': '13:48', 'build_command': 'BuildFactoryTechLab'}
+        {'time': '13:48', 'player': 'HeroMarine', 'build_command': 'BuildFactoryTechLab'}
     """
     # Pattern explanation:
     # At\s+           - matches "At" followed by one or more whitespace
     # (\d{1,2}:\d{2}) - captures time in format H:MM or HH:MM
     # ,\s+            - matches comma and whitespace
-    # \w+             - matches player name (one or more word characters)
+    # (\w+)           - captures player name (one or more word characters)
     # \s+used\s+      - matches " used " with surrounding whitespace
     # (Build\w+)      - captures only commands starting with "Build" (e.g., BuildExtractor, BuildSupplyDepot)
-    pattern = r'At\s+(\d{1,2}:\d{2}),\s+\w+\s+used\s+(Build\w+)'
+    pattern = r'At\s+(\d{1,2}:\d{2}),\s+(\w+)\s+used\s+(Build\w+)'
     
     match = re.search(pattern, line)
     
     if match:
         return {
             'time': match.group(1),
-            'build_command': match.group(2)
+            'player': match.group(2),
+            'build_command': match.group(3)
         }
     return None
 
