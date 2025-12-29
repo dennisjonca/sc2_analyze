@@ -40,3 +40,4 @@ htmlcov/
 # Output files
 build_order_output.txt
 *_output.txt
+test_mixed_input.txt

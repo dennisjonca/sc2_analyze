@@ -41,8 +41,8 @@ def extract_time_and_build(line):
     # ,\s+            - matches comma and whitespace
     # \w+             - matches player name (one or more word characters)
     # \s+used\s+      - matches " used " with surrounding whitespace
-    # (\w+)           - captures the build command (one or more word characters)
-    pattern = r'At\s+(\d{1,2}:\d{2}),\s+\w+\s+used\s+(\w+)'
+    # (Build\w+)      - captures only commands starting with "Build" (e.g., BuildExtractor, BuildSupplyDepot)
+    pattern = r'At\s+(\d{1,2}:\d{2}),\s+\w+\s+used\s+(Build\w+)'
     
     match = re.search(pattern, line)
     

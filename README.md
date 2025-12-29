@@ -84,7 +84,7 @@ python -m unittest test_sc2_extract.py -v
 
 The regex pattern used is:
 ```
-At\s+(\d{1,2}:\d{2}),\s+\w+\s+used\s+(\w+)
+At\s+(\d{1,2}:\d{2}),\s+\w+\s+used\s+(Build\w+)
 ```
 
 This matches lines in the format:
@@ -93,4 +93,6 @@ This matches lines in the format:
 - Comma and whitespace
 - Player name (one or more word characters)
 - ` used ` (with surrounding whitespace)
-- Build command (captured)
+- Build command starting with "Build" (captured)
+
+**Note:** Only commands starting with "Build" are extracted (e.g., BuildSupplyDepot, BuildExtractor). Commands like Gather, Train, Morph, etc. are filtered out.
