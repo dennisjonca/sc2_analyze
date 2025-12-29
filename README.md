@@ -6,7 +6,39 @@ StarCraft 2 game log analyzer - Extract times and build commands from game logs.
 
 This tool provides regex-based utilities to extract times and build commands from StarCraft 2 game logs.
 
-## Example Usage
+## Analyzing Build Orders from Files
+
+To analyze a complete build order from a text file:
+
+```bash
+python analyze_build_order.py input_file.txt output_file.txt
+```
+
+**Example:**
+
+```bash
+python analyze_build_order.py sample_input.txt build_order.txt
+```
+
+**Input file format** (one line per build command):
+```
+At 0:12, Maru used BuildSupplyDepot
+At 0:45, Maru used BuildBarracks
+At 1:30, Maru used BuildRefinery
+```
+
+**Output file format:**
+```
+Build Order
+--------------------------------------------------
+Time 0:12 - Build command: BuildSupplyDepot
+Time 0:45 - Build command: BuildBarracks
+Time 1:30 - Build command: BuildRefinery
+--------------------------------------------------
+Total builds: 3
+```
+
+## API Usage
 
 Extract time and build command from a log line:
 

@@ -36,3 +36,7 @@ ENV/
 .pytest_cache/
 .coverage
 htmlcov/
+
+# Output files
+build_order_output.txt
+*_output.txt
