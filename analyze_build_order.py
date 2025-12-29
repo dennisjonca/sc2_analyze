@@ -47,6 +47,12 @@ def analyze_file(input_path, output_path):
         print(f"Error reading input file: {e}")
         sys.exit(1)
     
+    # Helper function to convert time string to minutes
+    def time_to_minutes(time_str):
+        """Convert time string 'MM:SS' to total minutes as float"""
+        parts = time_str.split(':')
+        return int(parts[0]) + int(parts[1]) / 60.0
+    
     # Group by player
     players_builds = {}
     for item in build_orders:
@@ -57,7 +63,7 @@ def analyze_file(input_path, output_path):
     
     # Sort each player's builds by time
     for player in players_builds:
-        players_builds[player].sort(key=lambda x: x['time'])
+        players_builds[player].sort(key=lambda x: time_to_minutes(x['time']))
     
     # Write to output file
     try:

@@ -12,7 +12,7 @@ Usage:
     
     line = "At 13:48, HeroMarine used BuildFactoryTechLab"
     result = extract_time_and_build(line)
-    # Returns: {'time': '13:48', 'build_command': 'BuildFactoryTechLab'}
+    # Returns: {'time': '13:48', 'player': 'HeroMarine', 'build_command': 'BuildFactoryTechLab'}
 """
 
 import re
