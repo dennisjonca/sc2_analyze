@@ -1,0 +1,8 @@
+At 0:12, Maru used BuildSupplyDepot
+At 0:45, Maru used BuildBarracks
+At 1:30, Maru used BuildRefinery
+At 2:15, Maru used BuildFactory
+At 3:20, Maru used BuildStarport
+At 4:00, Maru used BuildCommandCenter
+At 5:30, Maru used BuildFactoryTechLab
+At 6:45, Maru used BuildEngineeringBay
